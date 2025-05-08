@@ -30,7 +30,7 @@ class ProductCreationQuestion(models.Model):
     name = fields.Char(
         required=True,
         index=True,
-        help="Technical name used to help organized questions.s",
+        help="Technical name used to help organized questions.",
     )
     question = fields.Char(
         translate=True, tracking=True, help="The question displayed to the end user"
@@ -150,7 +150,7 @@ class ProductCreationQuestion(models.Model):
     conditional_expected_result_answer_id = fields.Many2one(
         "product.creation.answer",
         tracking=True,
-        string="Expected awnser on parent question",
+        string="Expected answer on parent question",
     )
     is_automatic = fields.Boolean(
         compute="_compute_is_automatic",
