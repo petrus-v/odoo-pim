@@ -424,7 +424,10 @@ class ProductCreationDynamicWizard(models.TransientModel):
             "res_id": self.id,
             "view_mode": "form",
             "target": "new",
-            "context": {"invalidate_cache": str(uuid4())},
+            "context": {
+                "invalidate_cache": str(uuid4()),
+                "product_creation_wizard": True,
+            },
         }
 
     def _split_product_data(self):

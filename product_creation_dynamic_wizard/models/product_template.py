@@ -10,6 +10,20 @@ from odoo.tools import str2bool
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
+    def _update_cache(self, values, validate=True):
+        """Update the cache of ``self`` with ``values``.
+
+        :param values: dict of field values, in any format.
+        :param validate: whether values must be checked
+        """
+        if self.env.context.get("product_creation_wizard", False):
+            values = {
+                key: value
+                for key, value in values.items()
+                if not key.startswith("current_")
+            }
+        return super()._update_cache(values, validate=validate)
+
     def action_open_product_creation_dynamic_wizard(self):
         return self.env["product.creation.dynamic.wizard"].create({}).get_next_action()
 
